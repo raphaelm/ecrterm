@@ -220,7 +220,10 @@ class APDUPacket(object):
         if len(blob) >= pos + length:
             data = blob[pos:pos + length]
         else:
-            raise NotEnoughData('Not enough Data to create the packet data.')
+            # TODO: This is a hack. We ignore these packages for now since we've seen invalid, irrelevant packages
+            # in the wild.
+            return
+            # raise NotEnoughData('Not enough Data to create the packet data.')
         # step 1: fixed arguments.
         # if this packet has some fixed arguments, they have to be
         # parsed first.
